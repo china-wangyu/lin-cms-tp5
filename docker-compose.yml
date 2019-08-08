@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+
+  lin-cms-tp5:
+    image: wene/lin-cms-tp5
+    container_name: lin-cms-tp5
+    environment:
+      - APP_ENV=dev
+      - TIMEZONE=Asia/Shanghai
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "18000:8000"
+    volumes:
+      - ./:/var/www/lin-cms-tp5
+
+  mysql:
+    image: mysql
+    container_name: lin-cms-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./runtime/data/mysql:/var/lib/mysql
+    restart: always
+
+  redis:
+    container_name: lin-cms-redis
+    image: redis:4-alpine
+    ports:
+      - "16379:6379"
+    sysctls:
+      net.core.somaxconn: 65535
+    restart: always

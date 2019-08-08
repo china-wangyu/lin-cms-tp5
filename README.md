@@ -99,6 +99,22 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 composer install
 ```
 
+## docker 启动
+
+```bash
+# lin-cms-tp5 的访问端口：8000
+docker run -d --name lin-cms-tp5 -p 8000:8000 wene/lin-cms-tp5
+```
+
+## docker-compose 启动
+
+```bash
+# lin-cms-tp5 的访问端口：18000 
+# lin-cms-mysql 的访问端口：13306
+# lin-cms-redis 的访问端口：16379
+docker up -d
+```
+
 ## 数据库配置
 
 Lin 需要你自己在 MySQL 中新建一个数据库，名字由你自己决定。例如，新建一个名为 lin-cms 的数据库。接着，我们需要在工程中进行一项简单的配置。使用编辑器打开 Lin 工程根目录下``/config/database.php``，找到如下配置项：
