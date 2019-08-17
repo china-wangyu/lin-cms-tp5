@@ -73,9 +73,9 @@ class AuthMap
         return $methodsAuthGroup;
     }
 
-    public function handleAnnotation( $annotation)
+
+    public function handleAnnotation(array $annotation)
     {
-        // 新版
         if (empty($annotation) || in_array('hidden',$annotation))return[];
         return [
             $annotation[1] => [$annotation[0]=>['']]

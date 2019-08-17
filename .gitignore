@@ -2,8 +2,9 @@
 /.vscode
 /vendor
 *.log
-thinkphp
+/thinkphp
 .env
 .DS_Store
 composer.lock
 /public/uploads
+*.html
