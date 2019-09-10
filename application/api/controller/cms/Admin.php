@@ -29,7 +29,7 @@ class Admin
     /**
      * @doc('查询所有用户')
      * @auth('查询所有用户','管理员','hidden')
-     * @route('users/:group_id','get')
+     * @route('users','get')
      * @success('{
             "collection": [
                 {
@@ -59,6 +59,7 @@ class Admin
         }')
      * @error('')
      * @param Request $request
+     * @param('group_id','分组id','integer|between:2,10000000000')
      * @return array
      * @throws \think\exception\DbException
      */
@@ -111,7 +112,6 @@ class Admin
         "message": "3000: 错误内容 . 1000: 错误内容 . 账户不存在",
         "request_url": "cms\/admin\/3"
         }')
-     * @param('uid','用户uid','require|integer|between:2,10000000000')
      * @return \think\response\Json
      * @throws \LinCmsTp5\admin\exception\user\UserException
      */

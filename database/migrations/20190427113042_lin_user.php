@@ -2,7 +2,7 @@
 
 use think\migration\Migrator;
 
-class User extends Migrator
+class LinUser extends Migrator
 {
     /**
      * Change Method.
