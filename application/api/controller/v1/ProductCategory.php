@@ -25,7 +25,7 @@ class ProductCategory
      * @doc('查询指定id的商品分类')
      * @route(':id','get')
      * @param Request $id
-     * @param('id','图书id','require')
+     * @param('id','分类id','require')
      * @return mixed
      */
     public function getProductCategory($id)
@@ -42,13 +42,11 @@ class ProductCategory
     public function getProductCategorys()
     {
         $result = ProductCategoryModel::all()->toArray();
-        $topCategory = ['id'=>0,'title'=>'顶级分类'];
-        return !empty($result) ? array_unshift($result,$topCategory): [$topCategory];
-
+        return $result;
     }
 
     /**
-     * 搜索图书
+     * 搜索分类
      */
     public function search()
     {
@@ -56,27 +54,26 @@ class ProductCategory
     }
 
     /**
-     * @doc('新建图书')
-     * @route('/v1/book/','post')
+     * @doc('新建分类')
+     * @route('','post')
      * @param Request $request
-     * @param('title','图书名称','require')
-     * @param('author','图书作者','require')
-     * @param('image','图书img','require')
-     * @param('summary','简介','require')
+     * @param('title','分类名称','require|chsDash')
+     * @param('parent_id','分组父ID','require')
      * @return \think\response\Json
      */
     public function create(Request $request)
     {
         $params = $request->post();
+        dump($params);die;
         ProductCategoryModel::create($params);
-        return writeJson(201, '', '新建图书成功');
+        return writeJson(201, '', '新建分类成功');
     }
 
     /**
-     * @doc('更新图书')
+     * @doc('更新分类')
      * @route('/v1/book/:id','put')
      * @param Request $request
-     * @param('id','图书id','require')
+     * @param('id','分类id','require')
      * @return \think\response\Json
      */
     public function update(Request $request)
@@ -84,20 +81,20 @@ class ProductCategory
         $params = $request->put();
         $bookModel = new ProductCategoryModel();
         $bookModel->save($params, ['id' => $params['id']]);
-        return writeJson(201, '', '更新图书成功');
+        return writeJson(201, '', '更新分类成功');
     }
 
     /**
-     * @doc('删除图书')
+     * @doc('删除分类')
      * @route('/v1/book/:id','delete')
-     * @auth('删除图书','图书')
+     * @auth('删除分类','分类')
      * @param $bid
      * @return \think\response\Json
      */
     public function delete($bid)
     {
         ProductCategoryModel::destroy($bid);
-        Hook::listen('logger', '删除了id为' . $bid . '的图书');
-        return writeJson(201, '', '删除图书成功');
+        Hook::listen('logger', '删除了id为' . $bid . '的分类');
+        return writeJson(201, '', '删除分类成功');
     }
 }
